@@ -1,0 +1,8 @@
+<ul tabindex="-1" class="select dropdown-menu wbg-popover blue dropdown-btn-select"  ng-show="$isVisible()" role="select" style="max-height:180px;overflow-y: scroll;">
+    <li role="presentation" ng-repeat="match in $matches">
+        <a style="cursor: default;" role="menuitem" tabindex="-1" ng-click="$select($index, $event)">
+            <i class="{{$iconCheckmark}} pull-right" ng-if="$isMultiple && $isActive($index)"></i>
+            <span ng-bind="match.value"></span>
+        </a>
+    </li>
+</ul>

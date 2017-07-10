@@ -1,0 +1,13 @@
+
+<div class="popover wbg-popover">
+    <div class="popover-content">
+        <ul>
+            <li ng-click="form_editRow(1,$index,0);$hide()">向前添加一列</li>
+            <li ng-click="form_editRow(1,$index,1);$hide()">向后添加一列</li>
+            <li ng-click="form_editRow(-1,$index,1);$hide()">删除整列</li>
+            <li ng-click="$hide()">取消</li>
+        </ul>
+    </div>
+</div>
+
+

@@ -1,0 +1,28 @@
+
+
+<div ng-controller="modalctrl"  class="previewText">
+    <div class="modal_top">
+        <h4>网页模式</h4>
+    </div>
+    <div class="modal_body">
+        <div class="sections">
+            <div class="form_name">发票申请/报销</div>
+            <div  style="overflow: scroll;max-height: 500px;">
+                <div gridster='gridsterOpts' ng-style="{width:((gridsterOpts.columns)*200)+1+'px'}">
+                    <ul>
+                        <li gridster-item="item" newRowNum="newRowNum" ng-repeat="item in sercoundItems" ng-style="{zIndex:100-item.row}">
+                            <my-directivelist>
+                            </my-directivelist>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal_fotter">
+        <button type="button" class="btn btn-dark" ng-click="hideModel();$hide();">保存</button>
+        <button type="button" class="btn btn-light" ng-click="hideModel();$hide();">取消</button>
+    </div>
+</div>
+

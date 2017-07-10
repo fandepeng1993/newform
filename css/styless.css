@@ -1,0 +1,741 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.clearfix{
+    zoom: 1;
+    display: block;
+}
+/*通用表单table样式设置*/
+.form_table{
+    width: 75%;
+    float: left;
+    margin-top: 50px;
+    margin-right: 10px;
+}
+.apl-form-body {
+    height: 100%;
+    position: relative;
+}
+.apl-form-body .table_scroll{
+    max-width: 100%;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 20px;
+}
+.form_table table td{
+    width: 201px;
+    height: 50px;
+    border: 1px dashed #ddd;
+}
+.form_table table .rulerx{
+    width:26px!important;
+    text-align: center;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd!important;
+    position: relative;
+    padding: 0;
+
+}
+.form_table table .rulery{
+    height:20px!important;
+    text-align: center;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd!important;
+    position: relative;
+    padding: 0;
+
+}
+
+/*表单第二行文本样式*/
+
+.apl-form-reimburse .gridster {
+    margin-top: 18px;
+}
+.apl-form-body .gridster {
+    margin: 21px 0 0 25px;
+}
+.form_grid{
+    position: relative;
+    color: #4e5358;
+    font-size: 12px;
+}
+.form_grid label{
+    position: absolute;
+    margin: 6px 0;
+    display: block;
+    width: 78px;
+    text-align: center;
+    top: 0;
+    left: 0;
+    padding: 10px 8px;
+    font-weight: 400;
+}
+.form_grid label i.warn_star{
+    margin-right:4px;
+    color: #ff662b!important;
+}
+.form_grid .form_grid_content{
+    width: 100%;
+    padding:9px 20px 9px 78px;
+}
+.form_grid .element_tag{
+    width: 100%;
+
+}
+.form_table .form_grid_input{
+    height: 28px;padding: 0 12px;
+}
+.form_grid_input{
+    height: 32px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    color: #333;
+    font-size: 12px;
+    border: 1px solid #bdbdbd;
+    text-align: left;
+    position: relative;
+    width: 100%;
+}
+.form_table .form_ruler_btn{
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    right: 7px;
+    background: url("../img/down.png") center/8px 4px no-repeat;
+}
+button.btn-no-type{
+    margin: 0;
+    list-style-type: none;
+    background: 0 0;
+    border-style: none;
+    cursor: pointer;
+    outline: 0;
+}
+.form_table .rulerx .form_ruler_btn{
+    bottom: 0;
+}
+.form_table .icon_rulder_add.add_col{
+    right: -22px;
+    top: 0;
+    background: url("../img/add.png") center/20px 20px no-repeat;
+}
+.form_table .icon_rulder_add {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: block;
+    cursor: pointer;
+}
+.form_table .icon_rulder_add.add_row{
+    bottom:-22px;
+    background: url("../img/add.png") center/20px 20px no-repeat;
+}
+
+.form_btn{
+    border-radius: 3px;
+    height: 32px;
+    font-size: 12px;
+    color: #666;
+    background: #fff;
+    padding: 0 24px;
+    line-height: 32px;
+    border: none;
+    box-shadow: none;
+    outline: 0;
+    margin: 0;
+    cursor: pointer;
+}
+.form_btn.blue{
+    background: #289bf0;
+    color: #fff;
+    border: 1px solid #289bf0;
+}
+.form_btn.disabled{
+    border-color: #ccc;
+    background: #ccc;
+}
+
+.form_btn.blue:hover{
+    background: #55acf7;
+    border: 1px solid #55acf7;
+}
+.form_btn.disabled:hover{
+    background:#ccc;
+    border: 1px solid #ccc;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.form_btn.white{
+    border: 1px solid #dbdbdb;
+}
+.form_btn.white:hover{
+    background: #f5f5f5;
+}
+.form_btn_add_element{
+    width: 100%;
+    height: 44px!important;
+    font-size: 14px!important;
+}
+.form_btn, .form-input{
+    font-family: "Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","\5B8B\4F53","Microsoft Yahei",sans-serif;
+    box-sizing: border-box;
+}
+
+
+.form_icon_font{
+    font-family: icomoon!important;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    letter-spacing: 0;
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.apl-yl-area{
+    margin-top: 50px;
+}
+.apl-yl-area button{
+    margin-right: 8px;
+}
+.text-center{
+    text-align: center;
+}
+.form_table .form_element_context{
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,.12);
+    width: 540px!important;
+    padding: 12px;
+    position: absolute;
+    left: calc(50% - 270px)!important;
+    border: none;
+}
+.form_table .form_element_context li{
+    float: left;
+    width: 25%;
+    padding: 5px;
+}
+.form_table  .form_dropElement{
+    display: inline-block;
+    border-radius: 3px;
+    height: 32px;
+    line-height: 32px;
+    width: 100%;
+    font-size: 12px;
+    color: #666;
+    background: #fff;
+    padding-left: 45px;
+    cursor: pointer;
+    border: 1px solid #dbdbdb;
+    position: relative;
+}
+.form_table  .form_dropElement:hover{
+    background: #f5f5f5;
+}
+.form_table  .form_dropElement  .form_icon_font{
+    position: absolute;
+    left: 26px;
+    top: 9px;
+    font-size: 14px;
+}
+.dropright .dropdown-menu{
+    left:20px;
+    top: -30px;
+}
+.droprightc .dropdown-menu{
+    left:75px;
+
+}
+.rulerx .dropdown-menu,.rulery .dropdown-menu{
+    min-width:120px;
+}
+.gridster{
+    position: relative;
+    margin: auto;
+    height: 0;
+
+}
+
+
+/*右侧数据绑定*/
+
+.model-data{
+    /*width: 25%;*/
+    width: 260px;
+    float: left;
+    min-height:450px;
+    border-left: 1px solid #DBDBDB;
+    background: #fafafa;
+}
+
+.model-data .model-title{
+    padding: 12px 4px 12px 20px;
+    border-bottom: 1px solid #DBDBDB;
+    font-size: 14px;
+    position: relative;
+}
+.model-data .model-content{
+    padding-top: 30px
+}
+.model-data .model-content .mb20{
+    margin-bottom: 20px!important;
+}
+.model-data .model-content p{
+    color: #999;
+    text-align: center;
+    font-size: 12px;
+}
+.gridster-item{
+    background: #fff;
+}
+.form_table .gridster-item.active{
+    background-color: #F2F4F8;
+
+}
+.apl-form-body .gridster-loaded .gridster-item {
+    border: 1px;
+
+}
+
+.form_table li.gridster-item-moving{
+    /*border:1px solid #ddd;*/
+    box-shadow:rgb(213,213,213) 0px 2px 6px 0px;
+}
+
+
+
+
+
+
+/*
+**************************************************************
+
+**************************************************************
+
+**************************************************************
+18种表格表单的样式
+*/
+
+.form-element-gridster.type-text, .form-element-gridster.type-textarea{
+    height: 100%;
+}
+.form-element-gridster {
+    position: relative;
+    color: #4E535B;
+    font-size: 12px;
+    z-index: 0;
+}
+
+.form-element-gridster label {
+    position: absolute;
+    margin: 6px 0;
+    display: block;
+    width: 78px;
+    text-align: left;
+    top: 0;
+    left: 0;
+    padding: 10px 8px;
+    font-weight: 400;
+}
+
+.text-danger {
+    color: #FF746C!important;
+}
+.form-element-gridster .element-content{
+    width: 100%;
+    padding: 9px 20px 9px 75px;
+}
+.form-element-gridster .element-content.element-context-area{
+    height: 100%;
+}
+.form-element-gridster .element-content.element-datetime .apl-form-group:first-child{
+    padding-right: 4px;
+}
+.form-element-gridster .element-content.element-datetime .apl-form-group{
+    float: left;
+    width: 50%;
+}
+.handle-se {
+    cursor: se-resize;
+    width: 0;
+    height: 0;
+    right: 1px;
+    bottom: 1px;
+    border-style: solid;
+    border-width: 0 0 12px 12px;
+    border-color: transparent;
+}
+.gridster-item-resizable-handler {
+    position: absolute;
+    font-size: 1px;
+    display: block;
+    z-index: 5;
+}
+.gridster .gridster-item:hover .handle-se {
+    border-color: transparent transparent #ccc;
+}
+.form-element-gridster .element-tag{
+    width: 100%;
+}
+.asi-icon.asi-itm-delete{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    cursor: pointer;
+    background: url("../img/delete.png") center/12px 12px no-repeat;
+}
+
+.popover.wbg-popover .popover-content li{
+    list-style: none;
+    padding:5px 10px 5px 10px;
+    cursor: pointer;
+}
+.popover.wbg-popover .popover-content{
+    padding: 0px;
+}
+.popover.wbg-popover .popover-content li:hover{
+    background: #ddd;
+}
+
+.icon-s16 {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+.form-element-gridster .element-content .form_icon_font{
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    color: #999;
+}
+.apl-form-group {
+    position: relative;
+}
+.form-element-gridster .element-content.element-wbg-select .wbg-select{
+    width: 100%;
+}
+.wbg-select{
+    min-width: 100px;
+    /*width: 100%;*/
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+}
+.form-element-gridster .element-content.element-wbg-select .wbg-select-tags{
+    width: 100%;
+    min-height: 28px;
+}
+.wbg-select .wbg-select-tags {
+    min-width: 100%;
+    min-height: 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: normal;
+    padding-right: 30px;
+    cursor: text;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    box-sizing: border-box;
+}
+.form-element-gridster .element-content.element-wbg-select .wbg-select-tags .tags-no-multiple{
+    padding: 4px 10px;
+}
+.wbg-select .wbg-select-tags span.tags-no-multiple {
+    display: block;
+    padding: 10px;
+    line-height: 18px;
+    font-size: 12px;
+}
+.wbg-select .placeholder {
+    color: #999;
+}
+.wbg-select .wbg-select-tags .iconfont{
+    position: absolute;
+    right: 10px;
+    top: 16px;
+    font-size: 12px;
+    color: #999;
+}
+.form-element-gridster .element-content.element-wbg-select .iconfont{
+    top:4px;
+}
+.form-element-gridster .element-content.element-checkbox .element-tag, .form-element-gridster .element-content.element-radio .element-tag{
+padding: 4px 0;
+}
+.form-element-gridster .element-content.element-checkbox .element-tag>div, .form-element-gridster .element-content.element-radio .element-tag>div{
+    margin-right: 10px;
+}
+.checkbox-inline{
+    padding-left: 0!important;
+    padding-top: 0!important;
+}
+.wbg-checkbox-wrapper, .wbg-radio-wrapper{
+    display: inline-block;
+    line-height: 16px;
+}
+.cur-p {
+    cursor: pointer;
+}
+.btn, .btn-group, .btn-group-vertical, .caret, .checkbox-inline, .radio-inline, img{
+    vertical-align: middle;
+}
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.checkbox-inline, .radio-inline {
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+.wbg-checkbox.checked{
+    background: url(../img/checkbox-checked.png) center no-repeat;
+    background-size: 16px 16px;
+}
+.wbg-checkbox-wrapper .wbg-checkbox, .wbg-radio {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    vertical-align: top;
+    margin-right: 4px;
+}
+.wbg-checkbox {
+    background: url(../img/checkbox-unchecked.png) center no-repeat;
+    background-size: 16px 16px;
+}
+.btn-select {
+    background: 0 0;
+    border-radius: 4px;
+    position: relative;
+    min-width: 60px;
+    padding: 0 20px 0 10px;
+    word-break: break-all;
+    white-space: initial;
+    margin: 0;
+    list-style-type: none;
+    outline: 0;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff!important;
+}
+.btn-select, .dropdown-menu li>a {
+    text-align: left;
+    cursor: pointer;
+    font-size: 12px;
+}
+.form_table .btn-select{
+    height: 28px;
+    line-height: 28px;
+}
+.form_table .btn-select .caret {
+    top: 8px;
+    right: 12px;
+}
+.btn-select .caret {
+    font-weight: 400;
+    line-height: 1;
+    font-feature-settings: "liga";
+    font-variant-ligatures: discretionary-ligatures;
+    border: 0!important;
+    margin: 0!important;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+.btn-select .caret, .crm-select .caret {
+    letter-spacing: 0;
+    -ms-font-feature-settings: "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    speak: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.wbg-txt.hint, .wbg-txt.info, .wbg-txt.link, .wbg-txt.main-body, .wbg-txt.sub-body, .wbg-txt.succeed, .wbg-txt.warn {
+    font-size: 12px;
+    font-family: "Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","\5B8B\4F53","Microsoft Yahei",sans-serif;
+}
+.wbg-txt.hint {
+    color: #b3b3b3!important;
+}
+.form-element-gridster .element-content.element-attachment{
+    padding-top: 16px;
+    color: #999
+}
+
+.form-element-gridster .element-content.element-content-textview {
+    height: 100%;
+    padding: 9px 11px;
+    word-break: break-all;
+}
+.form-element-gridster .element-content.element-content-period{
+    padding: 0px;
+    height: 100%;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-title {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 8px;
+}
+.pull-right {
+    float: right!important;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-sub {
+    height: 100px;
+    padding: 0 8px;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-group:first-child {
+    padding-right: 4px;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-group {
+    width: 50%;
+    float: left;
+    position: relative;
+    height: 50px;
+    padding: 10px 0;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-group>label {
+    position: absolute;
+    padding: 16px 0;
+    margin: 0;
+    width: 76px;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-group>.apl-period-input {
+    width: 100%;
+    height: 28px;
+    padding-left: 80px;
+    position: relative;
+}
+.form-element-gridster .element-content .icon-rili {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    color: #999;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-sum {
+    text-align: right;
+    float: left;
+    line-height: 50px;
+    width: 100%;
+}
+
+.form-element-gridster.portrait label {
+    width: 100%;
+    top: 0;
+    margin: 0!important;
+    padding: 0!important;
+    text-align: left;
+}
+.form-element-gridster.portrait label{width:100%;top:0;margin:0!important;padding:0!important;text-align:left}
+.form-element-gridster.portrait .element-content{width:100%;padding:16px 20px 2px;margin:0}
+.form-element-gridster.portrait .element-content span.in-formula{top:26px}
+.form-element-gridster .element-content.element-content-period .apl-period-group.apl-period-hour-group>.apl-period-input input:first-child{
+    margin-right: 10%;
+}
+.form-element-gridster .element-content.element-content-period .apl-period-group.apl-period-hour-group>.apl-period-input input{
+    float: left;
+    width: 45%;
+}
+.previewText{
+    position: fixed;
+    width: 700px;
+    max-height: 80%;
+    background:#fff;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    top:10%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
+}
+.dropdown-menu{
+    z-index: 99999!important;
+}
+.modal_top{
+    padding: 15px;
+    color: #2888E5;
+    border-bottom: 1px solid #E4E4E4;
+}
+.modal_top h4{
+    margin: 0px;
+    font-size: 14px;
+}
+.modal_fotter{
+    text-align: right;
+    border-top: 1px solid #e4e4e4;
+    padding: 15px;
+}
+.btn.btn-dark {
+    border: none;
+    background: #2888E5;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.3), inset 0 -1px 0 0 rgba(0,0,0,.2);
+    border-radius: 2px;
+    font-size: 12px;
+    color:#fff;
+}
+.btn.btn-light {
+    border: none;
+    background: #FFF;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.15), inset 0 0 0 1px rgba(0,0,0,.15), inset 0 -1px 0 0 rgba(0,0,0,.2);
+    border-radius: 2px;
+    color: #333;
+    font-size: 12px;
+}
+.modal_body{
+    padding: 15px;
+}
+.sections{
+    background-color: #FBFBFB;
+}
+.sections .gridster{
+    margin: 0 auto;
+}
+.form_name{
+    text-align: left;
+    padding: 10px 15px;
+    border-bottom: 1px solid #E4E4E4;
+}
+.page_loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99998;
+    width: 100%;
+    height: 100%;
+    background: url(../img/loading.gif) center/40px 40px no-repeat;
+}

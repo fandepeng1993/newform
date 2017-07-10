@@ -1,0 +1,9 @@
+{
+  "rows":[
+          {"cols":["no1","no2","no3"]},
+          {"cols":["wo1","wo2","wo3"]},
+          {"cols":["mo1","mo2","mo3"]},
+          {"cols":["qo1","qo2","qo3"]}
+         ],
+  "paixu":["B","B","C"]
+}

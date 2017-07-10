@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="plugs/scroller/css/normalize.css">
+    <link rel="stylesheet" href="plugs/scroller/css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="plugs/scroller/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="plugs/scroller/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/angular-gridster.min.css">
+    <link rel="stylesheet" href="css/styless.css">
+    <link rel="stylesheet" href="alfont/iconfont.css">
+    <link rel="stylesheet" href="css/form.css">
+
+    <!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="css/docs.min.css">
+    <!--<link rel="stylesheet" href="css/libs.min.css">-->
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-ui-router.min.js"></script>
+    <script src="js/jquery-2.0.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/jquery.ba-resize.js"></script>
+    <script src="js/angular-gridster.js"></script>
+    <script src="js/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/angular-locale_zh-cn.js"></script>
+
+    <!--<script src="js/drag.js"></script>-->
+    <!--<script src="js/calculate.js"></script>-->
+    <!--<script src="js/angular-strap.min.js" ></script>-->
+
+    <script src="js/angular-strap.js" ></script>
+    <script src="js/angular-strap.tpl.min.js" ></script>
+    <script src="js/angular-sanitize.min.js"></script>
+    <!--<script src="js/popover.js"></script>-->
+    <!--滚动条插件-->
+
+    <script src="plugs/scroller/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="plugs/scroller/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script src="module/appmodule.js"></script>
+    <script src="controller/controllers.js"></script>
+    <script src="server/server.js"></script>
+    <style>
+        ::-webkit-scrollbar {width: 6px;height: 6px}/* 滚动槽 */
+        /*::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);border-radius: 10px;}!* 滚动条滑块 *!*/
+        ::-webkit-scrollbar-thumb {border-radius: 3px;background: #c3c3c3;}
+        ::-webkit-scrollbar-thumb:window-inactive {background-color: #c3c3c3;;}
+    </style>
+
+</head>
+<body ng-app="app" ng-controller="controllers" >
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0;">
+    <ul class="form_title_ul">
+        <li class="active">表单设置</li>
+        <li>未定义</li>
+        <li>其他</li>
+    </ul>
+</nav>
+<!-- 内容模块 -->
+<div class="form_content" ng-if="!isLoading">
+    <!-- 左边 -->
+    <div class="form_content_l">
+        <!-- 类型选择 -->
+        <div class="form_content_l_title">
+            <div class="form_content_l_title_l">
+                <span>类别：</span>
+                <select>
+                    <option value="">常用组件</option>
+                </select>
+            </div>
+            <div class="form_content_l_title_r" ng-click="showRight()">
+                <span>科目：</span>
+                <select>
+                    <option value="">组件</option>
+                </select>
+            </div>
+        </div>
+        <div class="form_content_l_content">
+            <div class="form_content_l_content_t">
+                <span>常用报销-通用费用</span>
+                <button class="btn btn-primary" ng-click="showPop()"><i class="iconfont icon-fuzhi copy_form"></i>复制表单到其他科目</button>
+            </div>
+            <!-- 内容表格 -->
+            <div class="form_content_l_content_cb clearfix">
+                    <div class="form_table apl-form-body " ng-class="{true: 'apl-form-reimburse'}[data.approvalType=='reimburse']">
+                        <div  class="table_scroll" ng-style="{height:xrow.length*50+62+(data.approvalType=='reimburse'?50:0)+'px'}">
+                            <table style="position: absolute;z-index: 1;" ng-style="{width:gridsterConfiguration.columns*200+20+'px'}">
+                                <tr class="xrow">
+                                    <td class="rulerx rulery"></td>
+                                    <td class="rulery droprightc" ng-repeat="m in paixu track by $index">
+                                        {{$index | UpabC}}
+                                        <button type="button" class="form_ruler_btn btn-no-type"
+                                                ng-if="true"
+                                                ng-show="true"
+                                                data-placement="right-bottom"
+                                                data-template-url="template/form.column.dropdown.tpl.html"
+                                                data-container="body" data-auto-close="1" bs-popover>
+                                        </button>
+                                        <i ng-click="form_editRow(1,$index,1)" title="添加列" class="icon_rulder_add add_col" ng-if="!paixu[$index+1]"></i>
+                                    </td>
+                                </tr>
+                                <tr class="xrow">
+                                    <td class="rulerx">0</td>
+                                    <td colspan="{{paixu.length}}">
+                                        <div class="form_grid">
+                                            <label>
+                                                <i class="warn_star">*</i>
+                                                报销金额
+                                            </label>
+                                            <div class="form_grid_content">
+                                                <input type="number" class="form_grid_input element_tag">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="xrow" ng-repeat="n in xrow track by $index" ng-cloak>
+                                    <td class="rulerx dropright">
+                                        {{$index+1}}
+                                        <div ng-if="xrow.length>1">
+                                            <button class="btn-no-type form_ruler_btn "
+                                                    ng-if="true"
+                                                    ng-show="true"
+                                                    data-placement="right-bottom"
+                                                    data-template-url="template/form.row.dropdown.tpl.html"
+                                                    data-container="body" data-auto-close="1" bs-popover>
+                                            </button>
+                                        </div>
+                                        <i ng-click="form_editColumn(1,$index,1)" title="添加行" class="icon_rulder_add add_row" ng-if="!xrow[$index+1]"></i>
+                                    </td>
+                                    <td ng-repeat="z in n.cols track by $index"></td>
+                                </tr>
+                            </table>
+                            <div gridster='gridsterConfiguration'
+                                 ng-style="{top:data.approvalType=='reimburse'?'50px':'0px', width:((gridsterConfiguration.columns)*200)+1+'px'}"
+                                 class="clearfix">
+                                <ul>
+                                    <!--xrow="xrow" paixu="paixu"-->
+                                    <li name="standardItems" gridster-item="item" newRowNum="newRowNum" ng-repeat="item in standardItems"
+                                        ng-click="moveIn(item,$index)"
+                                        ng-class="{true:'active'}[item.isActive]"
+                                        ng-style="{zIndex:100-item.row,cursor:item.readonly?'auto':'move'}" >
+                                        <my-directivelist>
+                                            <!--selectedstate="selectedstate" item="item" states="states"-->
+                                        </my-directivelist>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                        <div class="dropdown ">
+                            <button style="margin-top: 100px" class="form_btn blue form_btn_add_element dropdown-toggle"  data-toggle="dropdown">
+                                <i class="iconfont icon-add"></i>
+                                添加表单字段
+                            </button>
+                            <ul  class="dropdown-menu form_element_context" role="menu" style="top:-135px;">
+                                <li ng-repeat="ele in elementstag track by $index" ng-click="appendEle(ele)">
+                                    <div class="form_dropElement">
+                                        <i ng-class="{true:'iconfont form_icon_font {{ele.icon}}'}[true]"></i>
+                                        {{ele.title}}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="apl-yl-area">
+                            <div class="text-center">
+                                <button class="form_btn blue " ng-class="{true:'disabled'}[!isInEdit]" ng-click="saveFormElements()">
+                                    <i class=" iconfont icon-zhengque"></i>
+                                    保存表单
+                                </button>
+                                <button class="form_btn white">
+                                    <i class="iconfont icon-shuaxin"></i>
+                                    重置
+                                </button>
+                                <button class="form_btn white">
+                                    <i class="iconfont icon-add"></i>
+                                    添加表单到工作台
+                                </button>
+                                <button class="form_btn white" data-animation="am-fade-and-slide-top" bs-modal="modal" data-template-url="template/modalctrl.tpl.html">
+                                    <i class="iconfont icon-yan"></i>
+                                   预览模式
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- 右边 -->
+    <div class="form_content_r">
+        <div class="form_content_r_title">
+            <span>字段设置</span>
+            <button type="button" class="btn btn-link btn-sm" ng-click="deleteIcon(indexPo)" ng-if="dataMata"><span class="glyphicon glyphicon-trash trash_form"></span>删除</button>
+            <button class="btn btn-link btn-sm" ng-click="copyNode(dataMata)" ng-if="dataMata"><span class="iconfont icon-fuzhi copy_form"></span>复制</button>
+        </div>
+        <div class="form_content_r_content">
+            <my-directive clickdata="dataMata" xrow="xrow" paixu="paixu" typedata="data" newRowNum="newRowNum" titledata="titlesdata">
+            </my-directive>
+        </div>
+    </div>
+</div>
+<div class="page_loading" ng-if="isLoading">
+
+</div>
+
+<!-- 右边栏弹出 -->
+<div class="form_fix_bg"></div>
+<div class="form_pop">
+    <div class="form_pop_t">
+        <span>复制表单到其他科目</span>
+        <button class="btn btn-sm" ng-click="hidePop()"><span class="iconfont icon-icon"></span></button>
+    </div>
+    <div class="form_pop_c">
+        <form class="form-horizontal">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-4 text-muted">
+                    <input type="radio" checked>
+                    <span>将表单复制到</span>
+                </label>
+                <div class="col-sm-8">
+                    <select>
+                        <option>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <label class="col-sm-4 text-muted">
+                    <input type="radio">
+                    <span>复制到新科目</span>
+                </label>
+                <div class="col-sm-8">
+                    <input type="text">
+                </div>
+            </div>
+        </form>
+        <button class="btn btn-primary form_pop_c_b">确定</button>
+        <button class="btn btn-default form_pop_c_b" ng-click="hidePop()">取消</button>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>

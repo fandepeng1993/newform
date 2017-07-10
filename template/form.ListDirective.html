@@ -1,0 +1,404 @@
+<div class='my-class form-element-gridster {{item.typeclass}} form-group-sm clearfix' id="{{'element-'+item.row+'-'+ item.col}}"
+     ng-class="{true:'portrait'}[item.isLabelPortrait]">
+    <label onselectstart="return false;" ng-hide="item.typeclass | isInArray:['type-readText','type-period']">
+        {{item.label === "" ? item.type_placeholder: item.label}}
+        <i class="text-danger" ng-show="item.isEmpty">*</i>
+    </label>
+
+    <!-- textarea文本类控件-->
+    <div class="element-content element-context-area" ng-if="(item.element|isInArray:['textarea']) && item.type==''">
+        <textarea style="resize: none;min-height: 100%;min-width: 100%;"
+                  ng-model="item.defaultValue"
+                  ng-disabled="item.isDisable=='true'?true:false"
+                  ng-readonly="item.isReadonly"
+                  id="{{item.elementId}}"
+                  name="{{item.name}}"
+                  class="element-tag form_grid_input ng-pristine ng-valid ng-touched"
+                  rows="1"
+                  placeholder="{{item.Dplaceh}}" ></textarea>
+    </div>
+
+
+    <!--input 类的表单控件-->
+            <!--text-->
+    <div class="element-content element-context-text" ng-if="(item.type|isInArray:['text']) && item.element=='input'">
+        <input style="resize: none;min-height: 100%;min-width: 100%;"
+               type="{{item.type}}"
+               ng-model="item.defaultValue"
+               ng-disabled="item.isDisable"
+               ng-readonly="item.isReadonly"
+               id="{{item.elementId}}"
+               name="{{item.name}}"
+               class="element-tag form_grid_input ng-pristine ng-valid ng-touched"
+               rows="1"
+               placeholder="{{item.Dplaceh}}" >
+    </div>
+
+            <!--radio-->
+    <div class="element-content element-radio" ng-if="(item.type|isInArray:['radio']) && item.element=='input'">
+        <div class="element-tag">
+            <div ng-repeat="opt in item.options track by $index"
+                 ng-style="{'display': item.itemlayout=='1'?'inline-block':'block'}"
+                 style="display: block;">
+                <input type="radio"
+                       value="{{opt.value}}"
+                       ng-model="item.defaultValue"
+                       ng-disabled="item.isDisable=='true'?true:false"
+                       ng-readonly="item.isReadonly"
+                       name="{{item.name}}"
+                       class="ng-valid ng-dirty ng-touched" >
+                {{opt.text}}
+            </div>
+        </div>
+    </div>
+
+            <!--checkbox-->
+    <div class="element-content element-checkbox" ng-if="(item.type|isInArray:['checkbox']) && item.element=='input'">
+        <div class="element-tag">
+            <div ng-repeat="opt in item.options"
+                 ng-style="{'display': item.itemlayout=='1'?'inline-block':'block'}">
+                <!--<div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse" ng-click="click($event,opt)"  disabled="disabled">-->
+                    <!--<i class="wbg-checkbox" ng-class="{true:'checked'}[item.defaultValue.split(',').indexOf(opt.value)>=0]"></i>-->
+                <!--</div>-->
+
+                <input type="checkbox"
+                       value="{{opt.value}}"
+                       name="{{item.name}}"
+                       ng-checked="item.defaultValue.split(',').indexOf(opt.value)>=0?true:false"
+                       ng-disabled="item.isDisable=='true'?true:false"
+                       ng-readonly="item.isReadonly"
+                       class="ng-valid ng-dirty ng-touched">
+            {{opt.text}}
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--select 类的表单控件-->
+            <!--select-->
+    <div class="element-content" ng-if="item.element=='select'">
+
+        <select name="{{item.name}}" id="{{item.elementId}}"
+                style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"
+                class="element-tag btn-select ng-pristine ng-valid ng-touched"
+                ng-model="item.defaultValue"
+                ng-readonly="item.isReadonly">
+            <option value="" ng-if="!item.defaultValue">请选择</option>
+            <!--as icon.text for-->
+            <option value="{{icon.value}}" ng-repeat="icon in item.options">{{icon.text}}</option>
+        </select>
+    </div>
+
+
+
+                <!--date日期控件-->
+    <div class="element-content " ng-if="(item.type|isInArray:['date']) && item.element=='input'">
+        <div class="apl-form-group " >
+            <!--ng-class="{'has-error': datepickerForm.date.$invalid}"-->
+            <input type="text"
+                   class="form_grid_input ng-pristine ng-valid ng-scope ng-touched"
+                   ng-model="item.tempdateValue" name="date"
+                   data-date-format="yyyy-MM-dd"
+                   data-container="body"
+                   data-autoclose="1"
+                   data-date-type="number"
+                   bs-datepicker>
+            <!--<input type="text" class="form-control form_grid_input ng-pristine ng-untouched ng-valid" size="8" ng-model="item.tmpValue"   name="date" data-container="body" bs-datepicker>-->
+            <i class="iconfont form_icon_font icon-rili icon-s16"></i>
+        </div>
+    </div>
+
+                <!--time时间控件-->
+    <div class="element-content" ng-if="(item.type|isInArray:['time']) && item.element=='input'">
+        <div class="apl-form-group">
+            <!--<input type="text" class="form_grid_input ng-pristine ng-untouched ng-valid" ng-model="item.tmpValue" size="8">-->
+            <input type="text" class="form-control form_grid_input ng-pristine ng-untouched ng-valid" size="8"
+                   ng-model="item.temptimeValue"  data-time-format="HH:mm:ss" name="time"
+                   data-container="body" bs-timepicker>
+            <i class="iconfont form_icon_font icon-iconfonttime icon-s16"></i>
+        </div>
+    </div>
+
+                <!--datetime日期时间控件-->
+    <div class="element-content element-datetime clearfix" ng-if="(item.type|isInArray:['datetime']) && item.element=='input'">
+        <div class="apl-form-group">
+           <!-- <input type="text" class="form_grid_input ng-pristine ng-untouched ng-valid" ng-model="item.tempValue"
+                   size="8" name="date" data-container="body" bs-datepicker>-->
+            <input type="datetime"
+                   class="form_grid_input ng-pristine ng-valid ng-scope ng-touched"
+                   ng-model="item.tempdateValue" name="datetime"
+                   data-date-format="yyyy-MM-dd"
+                   data-container="body"
+                   data-autoclose="1"  data-date-type="number"
+                   bs-datepicker>
+            <i class="iconfont form_icon_font icon-rili icon-s16"></i>
+        </div>
+        <div class="apl-form-group">
+            <input type="text" class="form_grid_input ng-pristine ng-untouched ng-valid"
+                   ng-model="item.temptimeValue" size="8" data-time-format="HH:mm:ss" name="date" data-container="body" bs-timepicker>
+            <i class="iconfont form_icon_font icon-rili icon-s16"></i>
+        </div>
+    </div>
+
+                <!--hidden表单日期控件-->
+    <div class="element-content" ng-if="(item.type|isInArray:['hidden']) && item.element=='input'">
+        <div class="apl-form-group">
+            <!--<input type="text" class="form_grid_input ng-pristine ng-untouched ng-valid" ng-model="item.tmpValue" size="8">-->
+            <input type="hidden" class="form-control form_grid_input ng-pristine ng-untouched ng-valid" name="lidengke" value="lidengke">
+        </div>
+    </div>
+
+                <!--number数字类表单控件-->
+    <div class="element-content element-wbg-number clearfix" ng-if="(item.type|isInArray:['number']) && item.element=='input'">
+        <input type="number" ng-model="item.defaultValue" class="element-tag form_grid_input ng-pristine ng-valid ng-touched"  placeholder="{{item.Dplaceh}}&nbsp;{{item.units}}" >
+    </div>
+                <!--email邮箱表单控件-->
+    <div class="element-content element-wbg-number clearfix" ng-if="(item.type|isInArray:['email']) && item.element=='input'">
+        <input type="email" ng-model="item.defaultValue" class="element-tag form_grid_input ng-pristine ng-valid ng-touched"  placeholder="{{item.Dplaceh}}&nbsp;{{item.units}}" >
+    </div>
+
+                <!--附件表单控件-->
+    <div class="element-content element-attachment" ng-if="(item.type|isInArray:['file']) && item.element=='input'">
+        <i class="iconfont icon-s16 icon-attachment"></i>
+        <input type="file" name="attachment" accept="*/*" style="display: inline-block;">
+    </div>
+
+
+                <!--只读文本表单控件-->
+    <div class="element-content element-content-textview" ng-if="item.typeclass=='type-readText'">
+        <div ng-bind="item.defaultValue||'只读文本'"></div>
+    </div>
+
+                <!--时长表单控件-->
+    <div class="element-content element-content-period" ng-if="item.typeclass=='type-period'">
+        <div class="apl-period-title">
+            <div class="apl-period-name pull-left">
+                {{item.label === "" ? item.type_placeholder: item.label}}
+                <i class="text-danger" ng-show="item.isEmpty">*</i>
+            </div>
+            <div class="apl-period-sum-all pull-right">共计时长 {{(item.endtime-item.starttime) | timeDifference:item.accuracy}}
+                <span ng-if="item.accuracy == 'day'" class="ng-scope">天</span>
+                <span ng-if="item.accuracy == 'hour'" class="ng-scope">小时</span>
+            </div>
+        </div>
+
+        <div class="apl-period-sub clearfix">
+            <!--开始时间-->
+            <div class="apl-period-group apl-period-day-group" ng-if="item.accuracy == 'day'">
+                <label ng-class="{true:'small'}[fn.labelSmall(item.properties.label1)]">
+                    {{item.starttimes==''?'开始时间':item.starttimes}}
+                    <i class="text-danger">*</i>
+                </label>
+
+                <div class="apl-period-input">
+                    <div class="component-datepicker">
+                        <input type="datetime"
+                               class="form_grid_input ng-pristine ng-valid ng-scope ng-touched"
+                               ng-model="item.starttime"
+                               data-name="date"
+                               data-date-format="yyyy-MM-dd"
+                               data-container="body"
+                               data-autoclose="1" data-date-type="number"
+                               bs-datepicker>
+                    </div>
+                    <i class="iconfont icon-s16 icon-rili"></i>
+                </div>
+            </div>
+            <div class="apl-period-group apl-period-hour-group" ng-if="item.accuracy == 'hour'">
+                <label ng-class="{true:'small'}[fn.labelSmall(item.properties.label1)]" class="ng-binding">
+                    {{item.starttimes==''?'开始时间':item.starttimes}}
+                    <i class="text-danger">*</i>
+                </label>
+
+                <div class="apl-period-input">
+                    <input type="text" size="10" class="form-control" ng-model="item.starttime" data-autoclose="1" data-container="body" data-date-format="yyyy-MM-dd" placeholder="Date" bs-datepicker>
+                    <input type="text" size="8" class="form-control" ng-model="item.starttime" data-time-format="h:mm:ss" data-container="body" data-autoclose="1" placeholder="Time" bs-timepicker>
+                    <i class="wbg-icon-font icon-s16 wbg-icon-icon-apl-date"></i>
+                </div>
+            </div>
+            <!--结束时间-->
+            <div class="apl-period-group apl-period-day-group " ng-if="item.accuracy == 'day'">
+                <label ng-class="{true:'small'}[fn.labelSmall(item.properties.label2)]" >
+                    {{item.endtimes==''?'结束时间':item.endtimes}}
+                    <i class="text-danger">*</i>
+                </label>
+
+                <div class="apl-period-input">
+                    <div class="component-datepicker">
+                        <input type="datetime"
+                               class="form_grid_input ng-pristine ng-valid ng-scope ng-touched"
+                               ng-model="item.endtime"
+                               data-name="date"
+                               data-date-format="yyyy-MM-dd"
+                               data-autoclose="1"
+                               data-container="body"
+                               data-date-type="number"
+                               bs-datepicker>
+                    </div>
+                    <i class="iconfont icon-s16 icon-rili"></i>
+                </div>
+            </div>
+            <div class="apl-period-group apl-period-hour-group " ng-if="item.accuracy == 'hour'">
+                <label ng-class="{true:'small'}[fn.labelSmall(item.properties.label2)]" class="ng-binding">
+                    {{item.endtimes==''?'结束时间':item.endtimes}}
+                    <i class="text-danger">*</i>
+                </label>
+
+                <div class="apl-period-input">
+                    <input type="text" size="10" class="form-control" ng-model="item.endtime"  data-autoclose="1" data-date-format="yyyy-MM-dd" placeholder="Date"  data-container="body" bs-datepicker>
+                    <input type="text" size="8" class="form-control" ng-model="item.endtime" data-time-format="h:mm:ss" data-autoclose="1"  data-container="body"  placeholder="Time" bs-timepicker>
+                    <i class="wbg-icon-font icon-s16 wbg-icon-icon-apl-date"></i>
+                </div>
+            </div>
+
+
+            <div class="apl-period-sum">时长 {{(item.endtime-item.starttime) | timeDifference:item.accuracy}}
+                <span ng-if="item.accuracy == 'day'">天</span>
+                <span ng-if="item.accuracy == 'hour'">小时</span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!--人员选择控件-->
+    <!--    <div class="element-content  clearfix" ng-if="item.element=='contactSelect'">
+      &lt;!&ndash; <div type="hidden" ng-if="true" data-all-items="data.activeContacts" data-select-type="itemSelect"  class="ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope">
+           <div class="wbg-select"  data-template-url="template/form.personselect.html" data-placement="bottom" data-animation="am-flip-x" data-auto-close="1" bs-popover >
+               <div class="wbg-select-tags" ng-class="{true:'dropdown-show'}[showDropdown]">
+                   &lt;!&ndash;isEmpty(innerItems)&ndash;&gt;
+                   &lt;!&ndash;ng-bind="options.placeholder"&ndash;&gt;
+                   <span class="placeholder tags-no-multiple" ng-show="true" ng-bind="item.selectedstate?item.selectedstate:'请选择'"></span>
+                   &lt;!&ndash;<input type="text" ng-model="selectedstate">&ndash;&gt;
+                   <i class="icon-s16 iconfont icon-xiangxiajiantou" ng-class="{true:'wbg-icon-drop-up-12px',false:'wbg-icon-drop-down-12px'}[showDropdown==true]" style=""></i>
+               </div>
+           </div>
+       </div>&ndash;&gt;
+        <div class="apl-form-group " ng-class="{'has-error': datepickerForm.date.$invalid}">
+            <input type="text" id="{{item.elementId}}" ng-readonly="item.isReadonly" ng-disabled="item.isDisable" class="form_grid_input ng-pristine ng-valid ng-scope ng-touched">
+            &lt;!&ndash;<input type="text" class="form-control form_grid_input ng-pristine ng-untouched ng-valid" size="8" ng-model="item.tmpValue"   name="date" data-container="body" bs-datepicker>&ndash;&gt;
+            <i class="iconfont form_icon_font icon-rili icon-s16"></i>
+        </div>
+    </div>-->
+
+
+
+    <!--大写金额表单控件-->
+    <!--网址表单控件-->
+   <!-- <div class="element-content element-wbg-amount clearfix"  ng-if="item.element | isInArray:['amount','url','email']">
+        <input type="text"  class="element-tag form_grid_input ng-pristine ng-valid ng-touched" placeholder="{{item.Dplaceh}}" ng-model="item.itemvalue" ng-model-options="{debounce:1000}">
+    </div>-->
+
+
+    <!--单选框表单控件-->
+   <!-- <div class="element-content element-radio" ng-if="item.element=='radio'">
+        <div class="element-tag">
+            <div ng-repeat="opt in item.options track by $index"
+                 ng-style="{'display': item.itemlayout=='1'?'inline-block':'block'}"
+                 style="display: block;">
+                <input type="radio"
+                       value="$index"
+                       name='radio-{{item.row}}-{{item.col}}'
+                       class="ng-valid ng-dirty ng-touched" >
+                {{opt.value}}
+            </div>
+        </div>
+    </div>-->
+
+    <!--复选框表单控件-->
+   <!-- <div class="element-content element-checkbox" ng-if="item.element=='checkbox'">
+        <div class="element-tag">
+            <div ng-repeat="opt in item.options"
+                 ng-style="{'display': item.itemlayout=='1'?'inline-block':'block'}">
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"
+                     ng-class="{'cur-no':disabled}"
+                     ng-click="click($event)" ng-model="opt.value">
+                    <i class="wbg-checkbox "
+                       ng-class="{'checked':ngModel,'disabled':disabled}">
+                    </i>
+                </div>
+                {{opt.value}}
+            </div>
+        </div>
+    </div>-->
+
+    <!--下拉框表单控件-->
+  <!--  <div class="element-content" ng-if="item.element=='select'">
+        <select value="$index"
+                ng-model="item.defaultValue"
+                ng-readonly="item.isReadonly"
+                name="{{item.name}}"
+                style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"
+                class="element-tag btn-select ng-pristine ng-valid ng-touched"
+                ng-options="icon.value as icon.value for icon in item.options">
+        </select>
+
+
+
+      &lt;!&ndash;  <button type="button" class="element-tag btn-select ng-pristine ng-valid ng-touched"
+                ng-model="item.tmpValue" data-html="1"
+                data-placeholder="<span class='wbg-txt hint'>请选择</span>"
+                data-template-url="template/form.selection.html"
+                bs-options="icon.value as icon.value for icon in item.options"  data-container="body"  bs-select style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+        </button>&ndash;&gt;
+    </div>-->
+
+
+
+    <!--图片表单控件-->
+
+   <!-- <div class="element-content element-attachment " ng-if="item.element=='img'">
+        <i class="iconfont icon-s16 icon-tupian"></i>
+        添加图片
+    </div>-->
+
+    <!--部门选择表单控件-->
+    <!--<div class="element-content  clearfix" ng-if="item.element=='departmentSelect'">
+        <div class="apl-form-group " ng-class="{'has-error': datepickerForm.date.$invalid}">
+            <input type="text" id="{{item.elementId}}" ng-readonly="item.isReadonly" ng-disabled="item.isDisable" class="form_grid_input ng-pristine ng-valid ng-scope ng-touched">
+       &lt;!&ndash; <div type="hidden" ng-if="true" data-all-items="data.activeContacts" data-select-type="itemSelect"  class="ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope">
+            <div class="wbg-select"  data-template-url="template/form.departmentselect.html" data-placement="bottom" data-animation="am-flip-x" data-auto-close="1" bs-popover>
+                <div class="wbg-select-tags" ng-class="{true:'dropdown-show'}[showDropdown]">
+                    <span class="placeholder tags-no-multiple" ng-show="true" ng-bind="item.selectedstate?item.selectedstate:'请选择'"></span>
+                    <i class="icon-s16 iconfont icon-xiangxiajiantou" ng-class="{true:'wbg-icon-drop-up-12px',false:'wbg-icon-drop-down-12px'}[showDropdown==true]" style=""></i>
+                </div>
+            </div>
+        </div>&ndash;&gt;
+            <i class="iconfont form_icon_font icon-rili icon-s16" ng-click="ac()"></i>
+        </div>
+    </div>-->
+
+
+    <!--人员部门表单控件-->
+    <!--<div class="element-content clearfix" ng-if="item.element=='org'">
+        <div class="apl-form-group " ng-class="{'has-error': datepickerForm.date.$invalid}">
+            <input type="text" id="{{item.elementId}}" ng-readonly="item.isReadonly" ng-disabled="item.isDisable" class="form_grid_input ng-pristine ng-valid ng-scope ng-touched">
+            <i class="iconfont form_icon_font icon-rili icon-s16" ng-click="ac()"></i>
+        </div>
+        &lt;!&ndash;<div type="hidden" ng-if="true" data-all-items="data.activeContacts" data-select-type="itemSelect"  class="ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope">&ndash;&gt;
+            &lt;!&ndash;<div class="wbg-select"  data-template-url="template/form.persdepartselect.html" data-placement="bottom"  data-animation="am-flip-x" data-auto-close="1" bs-popover>&ndash;&gt;
+                &lt;!&ndash;<div class="wbg-select-tags" ng-class="{true:'dropdown-show'}[showDropdown]">&ndash;&gt;
+                    &lt;!&ndash;<span class="placeholder tags-no-multiple" ng-show="true" ng-bind="item.selectedstate?item.selectedstate:'请选择'"></span>&ndash;&gt;
+                    &lt;!&ndash;<i class="icon-s16 iconfont icon-xiangxiajiantou" ng-class="{true:'wbg-icon-drop-up-12px',false:'wbg-icon-drop-down-12px'}[showDropdown==true]" style=""></i>&ndash;&gt;
+                &lt;!&ndash;</div>&ndash;&gt;
+            &lt;!&ndash;</div>&ndash;&gt;
+        &lt;!&ndash;</div>&ndash;&gt;
+    </div>
+-->
+
+
+
+
+    <!--公式表单控件-->
+
+<!--
+    <div class="element-content element-expression" ng-if="item.element=='expression'" data-container="body" data-title="" bs-tooltip>
+        <i class="iconfont icon-s16 icon-kmd"></i>={{item.expression}}
+    </div>
+-->
+

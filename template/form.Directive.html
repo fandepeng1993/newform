@@ -1,0 +1,1442 @@
+<div class="form_content_r_content_p" ng-if="!clickdata">
+    <p>没有表单字段</p>
+    <p>请先在表单字段选择需要编辑的字段然后在此编辑字段的属性</p>
+</div>
+<!--ng-model="clickdata.label"-->
+<!--文本输入框-->
+<div class="form_content_r_content_p" ng-if="clickdata">
+    <!--<h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+       <label>标题（{{clickdata.type_placeholder}}）</label><br>
+       <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+       <label>标题（{{clickdata.type_placeholder}}）</label><br>
+       <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+       <label class="itittle">标题排列方向</label><br>
+       <div class="as-cd">
+           <label>
+               <input type="radio" name="textInput" ng-model="clickdata.isLabelPortrait"  value="false">横向
+           </label>
+           <label>
+               <input type="radio" name="textInput" ng-model="clickdata.isLabelPortrait" value="true">纵向
+           </label>
+       </div>
+       <label class="itittle">提示语</label><br>
+       <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" ng-model="clickdata.Dplaceh" placeholder="{{clickdata.type_placeholder}}" >
+
+
+
+
+
+       <label class="itittle">是否必填</label><br>
+       <div class="as-cd">
+           <label>
+               <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                   <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+               </div>
+               必填
+           </label>
+       </div>
+
+       <div>
+           <label class="itittle">新增字段</label><br>
+           <div class="as-cd">
+               <p>elementId值{{clickdata.elementId}}</p>
+               <p>errorMsg值{{clickdata.errorMsg}}</p>
+               <p>menuCode值{{clickdata.menuCode}}</p>
+               <p>name值{{clickdata.name}}</p>
+               <p>defaultValue值{{clickdata.defaultValue}}</p>
+               <label>
+                   <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+               </label>
+               <label>
+                   <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+               </label>
+               <br>
+               <label>
+                   <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+               </label>
+               <label>
+                   <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+               </label>
+               <br>
+               <label>
+                   <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+               </label>
+               <label>
+                   <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+               </label>
+               <br>
+           </div>
+       </div>
+   </div>-->
+    <!--公共样式-->
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <!--menuCode-->
+        <label>菜单代码（例:B00_04）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" disabled="disabled"  maxlength="10" ng-model="clickdata.menuCode">
+
+        <!--标题label-->
+        <label class="itittle">标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <!--标题label排序-->
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="textInput" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="textInput" ng-model="clickdata.isLabelPortrait" value="true">纵向
+            </label>
+        </div>
+
+        <!--私有样式-->
+                <!--文本textarea-->
+                <div ng-if="(clickdata.element|isInArray:['textarea']) && clickdata.type==''">
+                    <label class="itittle">提示语</label><br>
+                    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" ng-model="clickdata.Dplaceh" placeholder="{{clickdata.type_placeholder}}" >
+                </div>
+
+                <!--下拉框select-->
+                <div ng-if="(clickdata.element|isInArray:['select']) && clickdata.type==''">
+                    <div ng-if="(clickdata.element|isInArray:['select']) && clickdata.type==''">
+                        <label class="itittle">选项</label><br>
+                        <div class="as-cd">
+                            <div ng-repeat="selItem in clickdata.options" class="as-select-item clearfix">
+                                选项名称：<input ng-model="selItem.text"
+                                            class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                                            ng-blur="arrayForceUpdate(selItem)"
+                                            type="text" placeholder="选项名称">
+                                选项值：<input ng-model="selItem.value"
+                                             class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                                             ng-blur="arrayForceUpdate(selItem)"
+                                             type="text" placeholder="选项值">
+                                 <span ng-click="addItem($index)" class="asi-icon asi-add"></span>
+                                 <span ng-if="clickdata.options.length>1"
+                                 ng-click="deleteItem($index)" class="asi-icon asi-delete"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--单选框radio-->
+                <div ng-if="(clickdata.type|isInArray:['radio']) && clickdata.element=='input'">
+                    <label class="itittle">选项</label><br>
+                    <div class="as-cd">
+                        <div ng-repeat="selItem in clickdata.options" class="as-select-item clearfix">
+                            选项名称：<input ng-model="selItem.text"
+                                        class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                                        ng-blur="arrayForceUpdate(selItem)"
+                                        type="text" placeholder="选项名称">
+                            选项值：<input ng-model="selItem.value"
+                                       class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                                       ng-blur="arrayForceUpdate(selItem)"
+                                       type="text" placeholder="选项值">
+                                 <span ng-click="addItem($index)" class="asi-icon asi-add"></span>
+                                 <span ng-if="clickdata.options.length>1"
+                                       ng-click="deleteItem($index)" class="asi-icon asi-delete"></span>
+                        </div>
+                    </div>
+
+                    <label class="itittle">选项排列方式</label><br>
+                    <div class="as-cd">
+                        <label>
+                            <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="radioItem" value="0">纵向
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="radioItem" value="1">横向
+                        </label>
+                    </div>
+                </div>
+
+
+
+                <!--复选框checkbox-->
+                <div ng-if="(clickdata.type|isInArray:['checkbox']) && clickdata.element=='input'">
+                    <label class="itittle">选项</label><br>
+                    <div class="as-cd">
+                        <div ng-repeat="selItem in clickdata.options" class="as-select-item clearfix">
+                            选项名称：<input ng-model="selItem.text"
+                                        class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                                        ng-blur="arrayForceUpdate(selItem)"
+                                        type="text" placeholder="选项名称">
+                            选项值：<input ng-model="selItem.value"
+                                       class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                                       ng-blur="arrayForceUpdate(selItem)"
+                                       type="text" placeholder="选项值">
+                                 <span ng-click="addItem($index)" class="asi-icon asi-add"></span>
+                                 <span ng-if="clickdata.options.length>1"
+                                       ng-click="deleteItem($index)" class="asi-icon asi-delete"></span>
+                        </div>
+                    </div>
+
+                    <label class="itittle">选项排列方式</label><br>
+                    <div class="as-cd">
+                        <label>
+                            <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="checkItem" value="0">纵向
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="checkItem" value="1">横向
+                        </label>
+                    </div>
+                </div>
+
+                <!--日期date-->
+                <div ng-if="(clickdata.type|isInArray:['date']) && clickdata.element=='input'">
+
+                </div>
+
+
+
+                <!--时间time-->
+                <div ng-if="(clickdata.type|isInArray:['time']) && clickdata.element=='input'">
+
+                </div>
+
+
+
+                <!--日期时间datetime-->
+                <div ng-if="(clickdata.type|isInArray:['datetime']) && clickdata.element=='input'">
+
+                </div>
+
+
+
+
+        <!--元素ID-->
+        <label class="itittle">元素ID</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"   maxlength="10" ng-model="clickdata.elementId" placeholder="请填写元素ID">
+
+        <!--属性名称name-->
+        <label class="itittle">属性名称</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"   maxlength="10" ng-model="clickdata.name" placeholder="请填写属性名称">
+
+        <!--默认值defaultValue-->
+        <label class="itittle">默认值</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"   ng-model="clickdata.defaultValue" placeholder="请填写默认值">
+
+        <!--错误信息errorMsg-->
+        <label class="itittle">错误信息</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"   maxlength="10" ng-model="clickdata.errorMsg" placeholder="错误信息">
+
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+
+        <label class="itittle">是否禁用</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true" >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false">不禁用
+            </label>
+        </div>
+
+        <label class="itittle">是否可见</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+        </div>
+
+        <label class="itittle">是否可编辑</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+        </div>
+    </div>
+
+</div>
+<!--日期--><!--
+<div class="form_content_r_content_p" ng-if="clickdata.element=='date'">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <label>标题（{{clickdata.type_placeholder}}）</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+    <label class="itittle">标题排列方向</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="date" ng-model="clickdata.isLabelPortrait"  value="false" >横向
+        </label>
+        <label>
+            <input type="radio" name="date" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+        </label>
+    </div>
+    <label class="itittle">是否必填</label><br>
+    <div class="as-cd">
+        <label>
+            <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                <i class="wbg-checkbox"ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+            </div>
+            必填
+        </label>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;时间&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element=='time'">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <label>标题（{{clickdata.type_placeholder}}）</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+    <label class="itittle">标题排列方向</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="time" ng-model="clickdata.isLabelPortrait"  value="false">横向
+        </label>
+        <label>
+            <input type="radio" name="time" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+        </label>
+    </div>
+    <label class="itittle">是否必填</label><br>
+    <div class="as-cd">
+        <label>
+            <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+            </div>
+            必填
+        </label>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;日期时间&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element=='datetime'">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <label>标题（{{clickdata.type_placeholder}}）</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+    <label class="itittle">标题排列方向</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="datetime" ng-model="clickdata.isLabelPortrait"  value="false">横向
+        </label>
+        <label>
+            <input type="radio" name="datetime" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+        </label>
+    </div>
+    <label class="itittle">是否必填</label><br>
+    <div class="as-cd">
+        <label>
+            <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+            </div>
+            必填
+        </label>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;人员选择&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element=='contactSelect'">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <label>标题（{{clickdata.type_placeholder}}）</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+    <label class="itittle">标题排列方向</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="pesoncheck" ng-model="clickdata.isLabelPortrait"  value="false">横向
+        </label>
+        <label>
+            <input type="radio" name="pesoncheck" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+        </label>
+    </div>
+    <label class="itittle">是否必填</label><br>
+    <div class="as-cd">
+        <label>
+            <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+            </div>
+            必填
+        </label>
+    </div>
+    <label class="itittle">选择人数</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="singleper">单人
+        </label>
+        <label>
+            <input type="radio" name=" multiper">多人
+        </label>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;数字选择&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element=='number'">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <label>标题（{{clickdata.type_placeholder}}）</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+    <label class="itittle">标题排列方向</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="numberbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+        </label>
+        <label>
+            <input type="radio" name="numberbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+        </label>
+    </div>
+    <label>单位</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" ng-model="clickdata.units"  maxlength="10">
+    <label class="itittle">提示语</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" ng-model="clickdata.Dplaceh" placeholder="{{clickdata.type_placeholder}}" >
+
+    <label class="itittle">是否必填</label><br>
+    <div class="as-cd">
+        <label>
+            <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+            </div>
+            必填
+        </label>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+&lt;!&ndash;手机号码&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element=='tel'">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <label>标题（{{clickdata.type_placeholder}}）</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+    <label class="itittle">标题排列方向</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="numberbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+        </label>
+        <label>
+            <input type="radio" name="numberbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+        </label>
+    </div>
+    <label class="itittle">提示语</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" ng-model="clickdata.Dplaceh" placeholder="{{clickdata.type_placeholder}}" >
+
+    <label class="itittle">是否必填</label><br>
+    <div class="as-cd">
+        <label>
+            <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+            </div>
+            必填
+        </label>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+&lt;!&ndash;大写金额&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['amount']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="capitalmoney" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="capitalmoney" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+            </label>
+        </div>
+        <label class="itittle">提示语</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" ng-model="clickdata.Dplaceh" placeholder="{{clickdata.type_placeholder}}" >
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;单选框&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="(clickdata.type|isInArray:['radio']) && clickdata.element=='input'" >
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="radiobox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="radiobox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+            </label>
+        </div>
+        <label class="itittle">选项</label><br>
+        <div class="as-cd">
+            <div ng-repeat="selItem in clickdata.options" class="as-select-item clearfix">
+                <input ng-model="selItem.value"
+                       class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                       ng-blur="arrayForceUpdate(selItem)"
+                       type="text" placeholder="选项">
+                <span ng-click="addItem($index)" class="asi-icon asi-add"></span>
+                <span ng-if="clickdata.options.length>1"
+                      ng-click="deleteItem($index)" class="asi-icon asi-delete"></span>
+            </div>
+
+        </div>
+
+
+        <label class="itittle">选项排列方式</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="radioItem" value="0">纵向
+            </label>
+            <label>
+                <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="radioItem" value="1">横向
+            </label>
+        </div>
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="clickdata.isEmpty">
+                    <i class="wbg-checkbox"
+                       ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;复选框&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['checkbox']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="checkboxbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="checkboxbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+            </label>
+        </div>
+        <label class="itittle">选项</label><br>
+        <div class="as-cd">
+            <div ng-repeat="selItem in clickdata.options" class="as-select-item clearfix">
+                <input ng-model="selItem.value"
+                       class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                       ng-blur="arrayForceUpdate(selItem)"
+                       type="text" placeholder="选项">
+                <span ng-click="addItem($index)" class="asi-icon asi-add"></span>
+                <span ng-if="clickdata.options.length>1"
+                      ng-click="deleteItem($index)" class="asi-icon asi-delete"></span>
+            </div>
+
+        </div>
+
+
+        <label class="itittle">选项排列方式</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="checkItem" value="0">纵向
+            </label>
+            <label>
+                <input type="radio" ng-model="clickdata.itemlayout" ng-change="itemsChange()" name="checkItem" value="1">横向
+            </label>
+        </div>
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="clickdata.isEmpty">
+                    <i class="wbg-checkbox"
+                       ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;下拉框&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['select']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="dropdownbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="dropdownbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+            </label>
+        </div>
+        <label class="itittle">选项</label><br>
+        <div class="as-cd">
+            <div ng-repeat="selItem in clickdata.options" class="as-select-item clearfix">
+                <input ng-model="selItem.value"
+                       class="asi-text form_grid_input apl-item-input ng-valid ng-touched ng-dirty"
+                       ng-blur="arrayForceUpdate(selItem)"
+                       type="text" placeholder="选项">
+                <span ng-click="addItem($index)" class="asi-icon asi-add"></span>
+                <span ng-if="clickdata.options.length>1"
+                      ng-click="deleteItem($index)" class="asi-icon asi-delete"></span>
+            </div>
+        </div>
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;网址&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['url','email']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="urlbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="urlbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+            </label>
+        </div>
+        <label class="itittle">提示语</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" ng-model="clickdata.Dplaceh" placeholder="{{clickdata.type_placeholder}}" >
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;附件&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['attachment']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;图片&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['img']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;部门选择&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['departmentSelect']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <label>标题（{{clickdata.type_placeholder}}）</label><br>
+    <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched" maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+    <label class="itittle">标题排列方向</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio"  name="departmentbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+        </label>
+        <label>
+            <input type="radio"  name="departmentbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+        </label>
+    </div>
+    <label class="itittle">是否必填</label><br>
+    <div class="as-cd">
+        <label>
+            <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+            </div>
+            必填
+        </label>
+    </div>
+    <label class="itittle">选择部门数</label><br>
+    <div class="as-cd">
+        <label>
+            <input type="radio" name="singledepart">单部门
+        </label>
+        <label>
+            <input type="radio" name="multidepart">多部门
+        </label>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;只读文本&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['textView']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>{{clickdata.type_placeholder}}</label><br>
+        <textarea
+                class="as-input form_grid_input apl-form-input textview-input ng-valid ng-touched ng-dirty ng-valid-parse"
+                placeholder="文本内容"
+                ng-model="clickdata.tempValue">
+        </textarea>
+
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;人员部门&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['org']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="persdepartselectbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="persdepartselectbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+            </label>
+        </div>
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;时长&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['period']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">小标题1</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"
+               maxlength="10" ng-model="clickdata.starttimes" placeholder="开始时间">
+        <label class="itittle">小标题2</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"
+               maxlength="10" ng-model="clickdata.endtimes" placeholder="结束时间">
+        <div class="as-cd itittle">
+            <label>
+                <input type="radio" name="timeLength" ng-model="clickdata.accuracy"  value="day">天数
+            </label>
+            <label>
+                <input type="radio" name="timeLength" ng-model="clickdata.accuracy"  value="hour">小时
+            </label>
+        </div>
+        <label>
+            <p ng-if="clickdata.accuracy=='day'">计算单位为天，最小为0.5天</p>
+            <p ng-if="clickdata.accuracy=='hour'">计算单位为小时，最小为0.5小时</p>
+        </label><br>
+        <label class="itittle">是否必填</label><br>
+
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;公式&ndash;&gt;
+<div class="form_content_r_content_p" ng-if="clickdata.element | isInArray:['expression']">
+    <h5>{{clickdata.label === "" ? clickdata.type_placeholder: clickdata.label}}设置</h5>
+    <div>
+        <label>标题（{{clickdata.type_placeholder}}）</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"  maxlength="10" ng-model="clickdata.label" placeholder="{{clickdata.type_placeholder}}">
+
+        <label class="itittle">标题排列方向</label><br>
+        <div class="as-cd">
+            <label>
+                <input type="radio" name="expressionbox" ng-model="clickdata.isLabelPortrait"  value="false">横向
+            </label>
+            <label>
+                <input type="radio" name="expressionbox" ng-model="clickdata.isLabelPortrait"  value="true">纵向
+            </label>
+        </div>
+        <label class="itittle">单位</label><br>
+        <input type="text" class="form_grid_input ng-valid ng-valid-maxlength ng-dirty ng-touched"
+               maxlength="10" ng-model="clickdata.danwei">
+        <label class="itittle">公式</label><br>
+        <div class="as-cd as-cd-exp">
+            <div class="clearfix">
+                <span class="ace-icon"><i class="iconfont icon-kmd"></i>=</span>
+                <input class="form_grid_input ng-valid ng-dirty ng-valid-parse ng-touched"
+                       ng-model="clickdata.expression" type="text" >
+                <button class="form_btn blue" ng-click="expressionCheck(data.thisSelectElement,data.innerElements,true)">验证</button>
+            </div>
+            <div class="as-exp-warn wbg-txt .form_btn.orange orange">
+                <p>注：手写坐标号及 + - * / 字符。</p>
+                <p>例1: A1+B2-C3</p>
+                <p>例2: (A1+B2)*C3/D4</p>
+                <p ng-if="typedata.approvalType=='reimburse'">注意: 报销金额不能作为公式字段</p>
+            </div>
+        </div>
+        <label class="itittle">是否必填</label><br>
+        <div class="as-cd">
+            <label>
+                <div class="checkbox-inline wbg-checkbox-wrapper cur-p no-select ng-isolate-scope ng-valid ng-dirty ng-valid-parse"  ng-click="setclick($event)" ng-model="data.thisSelectElement.properties.required">
+                    <i class="wbg-checkbox" ng-class="{true:'checked'}[clickdata.isEmpty]"></i>
+                </div>
+                必填
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label class="itittle">新增字段</label><br>
+        <div class="as-cd">
+            <p>elementId值{{clickdata.elementId}}</p>
+            <p>errorMsg值{{clickdata.errorMsg}}</p>
+            <p>menuCode值{{clickdata.menuCode}}</p>
+            <p>name值{{clickdata.name}}</p>
+            <p>defaultValue值{{clickdata.defaultValue}}</p>
+
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="true"  >禁用
+            </label>
+            <label>
+                <input type="radio" name="isDisable" ng-model="clickdata.isDisable" value="false" >没禁用
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="true"  >可见
+            </label>
+            <label>
+                <input type="radio" name="isVisible" ng-model="clickdata.isVisible" value="false" >不可见
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="true"  >可编辑
+            </label>
+            <label>
+                <input type="radio" name="isEditable" ng-model="clickdata.isEditable" value="false" >不可编辑
+            </label>
+            <br>
+        </div>
+    </div>
+</div>-->
+
+
+
+
+
