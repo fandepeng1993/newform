@@ -29,7 +29,7 @@
 }
 .form_content_l{
 	padding-top: 20px;
-	
+	/*min-width: 840px;*/
 	width: calc(100% - 260px);
 	float: left;
 }

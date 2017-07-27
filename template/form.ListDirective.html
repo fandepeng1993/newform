@@ -260,6 +260,9 @@
         </div>
     </div>
 
+    <div class="element-control" ng-if="item.isActive && otherread">
+        <i class="asi-icon asi-itm-delete" ng-click="deleteIcon($index)"></i>
+    </div>
 
 
 
@@ -389,16 +392,16 @@
             &lt;!&ndash;</div>&ndash;&gt;
         &lt;!&ndash;</div>&ndash;&gt;
     </div>
--->
 
+       <!--公式表单控件-->
 
-
-
-    <!--公式表单控件-->
-
-<!--
-    <div class="element-content element-expression" ng-if="item.element=='expression'" data-container="body" data-title="" bs-tooltip>
+   <!-- <div class="element-content element-expression" ng-if="item.type=='expression'" data-container="body" data-title="" bs-tooltip>
         <i class="iconfont icon-s16 icon-kmd"></i>={{item.expression}}
     </div>
--->
 
+
+    <div class="element-control" ng-if="item.isActive && otherread">
+        <i class="asi-icon asi-itm-delete" ng-click="deleteIcon($index)"></i>
+    </div>
+    -->
+</div>
