@@ -35,24 +35,28 @@ angular.module('controller',['ngSanitize','mgcrea.ngStrap','gridster'])
             $scope.form_editRow=function(a,inx,c){
                 //console.log(inx);
                 //从inx 0开始 A:65
-               $scope.form_editColumn=function(a,inx,c){
-                //console.log(inx);
-                //从inx 0开始 A:65
-				//删除列
                 if(a<0&&$scope.paixu.length>3){
                     for(var i=$scope.standardItems.length-1;i>=0;i--){
                         if($scope.standardItems[i] && $scope.standardItems[i].col<=inx && inx < $scope.standardItems[i].col+$scope.standardItems[i].sizeX){
                             $scope.standardItems.splice(i,1);
                         }
+
                     }
-                   
-                    for(var k=0;k<=$scope.standardItems.length-1;k++){
-                        if($scope.standardItems[k] && $scope.standardItems[k].col>inx){
-                            $scope.standardItems[k].col--;
+                    for(var z=0;z<$scope.xrow.length;z++){
+                        //if($scope.standardItems[])
+                            ($scope.xrow)[z].cols.splice(inx,c);
+                    }
+                    for(var i=0;i<=$scope.standardItems.length-1;i++){
+                        if($scope.standardItems[i] && $scope.standardItems[i].col>inx){
+                            $scope.standardItems[i].col--;
                         }
                     }
-                    
+
+
                     $scope.paixu.splice(inx,c);
+                    //$scope.widthes=parseInt($scope.widthes)-201+'px';
+                    //$('#mCSB_1_container').css('width',$scope.widthes);
+                    $('.form_table_in').mCustomScrollbar("scrollTo","right");
                     $scope.gridsterConfiguration.columns=$scope.paixu.length;
                 }
                 else if(a>0 && $scope.paixu.length<8) {
@@ -72,16 +76,18 @@ angular.module('controller',['ngSanitize','mgcrea.ngStrap','gridster'])
                        }
                     }
                     $scope.paixu.splice(inx+c,0,'');
+                    for(var i=0;i<$scope.xrow.length;i++){
+                        ($scope.xrow)[i].cols = new Array($scope.paixu.length);
+                    }
+                    //$scope.widthes=parseInt($scope.widthes)+201+'px';
+                    //$('#mCSB_1_container').css('width',$scope.widthes);
+                    $('.form_table_in').mCustomScrollbar("scrollTo","right");
                     $scope.gridsterConfiguration.columns=$scope.paixu.length;
                 }
                 else {
                     return;
                 }
-                for(var i=0;i<$scope.xrow.length;i++){
-                    ($scope.xrow)[i].cols = new Array($scope.paixu.length);	
-                }
-             
-			};
+            };
 
            //向上或者下添加行数
            $scope.form_editColumn=function(a,inx,c){
